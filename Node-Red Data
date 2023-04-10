@@ -1,0 +1,291 @@
+[
+    {
+        "id": "e260550dd7a6fce3",
+        "type": "tab",
+        "label": "Smart Garden Monitoring System",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d9c32fffb16483e6",
+        "type": "mqtt in",
+        "z": "e260550dd7a6fce3",
+        "name": "",
+        "topic": "garden/sensor/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ff2d0912a710ed17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "325f786421d70d8c"
+            ]
+        ]
+    },
+    {
+        "id": "52ac9fb9ee3a3823",
+        "type": "ui_gauge",
+        "z": "e260550dd7a6fce3",
+        "name": "",
+        "group": "38956c3a6907a200",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "temperature",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2e76e53568706565",
+        "type": "function",
+        "z": "e260550dd7a6fce3",
+        "name": "function 1",
+        "func": "if (msg.payload < 500) {\n    msg.payload = \"on\";\n} else {\n    msg.payload = \"off\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 500,
+        "wires": [
+            [
+                "a4c2cf72f3b96588"
+            ]
+        ]
+    },
+    {
+        "id": "d683d3032b33d6ee",
+        "type": "mqtt in",
+        "z": "e260550dd7a6fce3",
+        "name": "",
+        "topic": "garden/sensor/soil_moisture",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ff2d0912a710ed17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "1a4c6549c01cfd3a",
+                "2e76e53568706565"
+            ]
+        ]
+    },
+    {
+        "id": "ee17d97697923ba7",
+        "type": "mqtt in",
+        "z": "e260550dd7a6fce3",
+        "name": "",
+        "topic": "garden/sensor/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ff2d0912a710ed17",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "52ac9fb9ee3a3823"
+            ]
+        ]
+    },
+    {
+        "id": "325f786421d70d8c",
+        "type": "ui_gauge",
+        "z": "e260550dd7a6fce3",
+        "name": "",
+        "group": "3f15e72ca1b8fa05",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 780,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1a4c6549c01cfd3a",
+        "type": "ui_gauge",
+        "z": "e260550dd7a6fce3",
+        "name": "",
+        "group": "b12a82e8eb1e180e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "soil_moisture",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 810,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a4c2cf72f3b96588",
+        "type": "ui_led",
+        "z": "e260550dd7a6fce3",
+        "order": 3,
+        "group": "b12a82e8eb1e180e",
+        "width": 4,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 770,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "0ab65e75e8bdbbb0",
+        "type": "ui_spacer",
+        "z": "e260550dd7a6fce3",
+        "name": "spacer",
+        "group": "b12a82e8eb1e180e",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "5f849b769734731a",
+        "type": "ui_spacer",
+        "z": "e260550dd7a6fce3",
+        "name": "spacer",
+        "group": "b12a82e8eb1e180e",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "ff2d0912a710ed17",
+        "type": "mqtt-broker",
+        "name": "mqtt",
+        "broker": "192.168.2.104",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "38956c3a6907a200",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "25813c5577cd6510",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "3f15e72ca1b8fa05",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "25813c5577cd6510",
+        "order": 2,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "b12a82e8eb1e180e",
+        "type": "ui_group",
+        "name": "Group 3",
+        "tab": "25813c5577cd6510",
+        "order": 3,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "25813c5577cd6510",
+        "type": "ui_tab",
+        "name": "Smart Garden Monitoring System",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
